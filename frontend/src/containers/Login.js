@@ -17,7 +17,7 @@ const Login = () => {
     const [name, setName] = useState("");
 
     //hook import
-    const { isManager, iflog, ifsend, setifsend } = useWebsite();
+    const { isManager, iflog, checkManager, verifyLogin } = useWebsite();
 
     //navigate define
     const navigate = useNavigate();
@@ -29,7 +29,13 @@ const Login = () => {
         if(!id || !name){
             return
         }
-        navigate("/")
+        const getLogin = verifyLogin(name, id);
+        if(getLogin){
+            navigate("/");
+        }
+        else{
+            navigate("/Login");
+        }
 
         
     }
@@ -68,7 +74,7 @@ const Login = () => {
             <Button 
                 variant="contained" 
                 disabled={!id || !name}
-                // onClick={()=>{handleLogin()}}
+                onClick={()=>{handleLogin()}}
                 >
                 Login
             </Button>
