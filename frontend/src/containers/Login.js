@@ -6,12 +6,9 @@ import {Box, Divider, TextField, Typography, Button, Alert, AlertTitle} from "@m
 
 //hook import
 import { useWebsite } from "./hooks/WebsiteContext";
-import useBackend from "./hooks/useBackend";
 
 //import navigate
 import { useNavigate, useLocation } from "react-router-dom";
-
-import qs from 'qs'
 
 //functional component 
 const Login = () => {
@@ -20,7 +17,7 @@ const Login = () => {
     const [name, setName] = useState("");
 
     //hook import
-    const { checkManager, iflog, ifsend, setifsend } = useWebsite();
+    const { isManager, iflog, ifsend, setifsend } = useWebsite();
 
     //navigate define
     const navigate = useNavigate();
@@ -50,37 +47,30 @@ const Login = () => {
             width: "100%",
             justifyContent: "center"
         }}>
-            <Typography variant="h5" component="div" justifySelf="center">買家登入</Typography>
+            <Typography variant="h5" component="div" justifySelf="center">User Login</Typography>
             <Divider sx={{width: "100%"}}/>
             <TextField
                 variant="outlined"
-                label="使用者名稱"
+                label="User Name"
                 value={name}
                 onChange={(e)=>{setName(e.target.value)}}
             />
             <TextField
                 variant="outlined"
-                label="使用者ID"
+                label="User ID"
                 value={id}
                 onChange={(e)=>{setId(e.target.value)}}
             />
-            {openAlert? 
+            {/* {openAlert? 
             <Alert severity="error">
                 <AlertTitle>{Alert}</AlertTitle>
-            </Alert>:<></>}
-            <Button 
-                variant="contained" 
-                sx={{backgroundColor: "green"}}
-                onClick={()=>{handleLine()}}
-                >
-                使用Line登入
-            </Button>
+            </Alert>:<></>} */}
             <Button 
                 variant="contained" 
                 disabled={!id || !name}
-                onClick={()=>{handleLogin()}}
+                // onClick={()=>{handleLogin()}}
                 >
-                登入 / 註冊
+                Login
             </Button>
         </Box>
     )
