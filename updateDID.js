@@ -104,7 +104,11 @@ export async function customResolution() {
         MethodScope.VerificationMethod(),
     );
 
+    // console.log("Document:", document.id());
+
+
     // 2. Attach a new method relationship to the inserted method.
+    // document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
     document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
 
     // 3. Add a new Service.
