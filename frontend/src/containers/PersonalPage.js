@@ -12,7 +12,7 @@ import { Typography, Box, Chip, Divider, Stack } from '@mui/material';
 //hooks import
 
 //functional component
-const ManagerPage = () => {
+const PersonalPage = () => {
 
     //return
     return(
@@ -22,7 +22,7 @@ const ManagerPage = () => {
             gap: 2
             }}>
             <Typography variant="h5" component="div">
-                Manager Page
+                Personal Info
             </Typography>
             <Divider />
         </Box>
@@ -30,4 +30,4 @@ const ManagerPage = () => {
 }
 
 //export
-export default ManagerPage;
+export default PersonalPage;
