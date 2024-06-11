@@ -35,7 +35,7 @@ const strongholdPath = 'client.stronghold';
 const password = process.env.STRONGHOLD_PASSWORD;
 
 // Demonstrates how to set up a resolver using custom handlers.
-export async function customResolution() {
+export async function updateDID(concertname, ticketprice) {
     
     // Set up a handler for resolving Ed25519 did:key
     const keyHandler = async function(didKey){
@@ -94,28 +94,35 @@ export async function customResolution() {
     }
 
     // update
-    const storage = new Storage(new JwkMemStore(), new KeyIdMemStore());
-    // 1. Insert a new Ed25519 verification method in the DID document.
-    await document.generateMethod(
-        storage,
-        JwkMemStore.ed25519KeyType(),
-        JwsAlgorithm.EdDSA,
-        "#key-2",
-        MethodScope.VerificationMethod(),
-    );
+    // const storage = new Storage(new JwkMemStore(), new KeyIdMemStore());
+    // // 1. Insert a new Ed25519 verification method in the DID document.
+    // await document.generateMethod(
+    //     storage,
+    //     JwkMemStore.ed25519KeyType(),
+    //     JwsAlgorithm.EdDSA,
+    //     "#key-2",
+    //     MethodScope.VerificationMethod(),
+    // );
 
-    // console.log("Document:", document.id());
+    // // console.log("Document:", document.id());
 
 
-    // 2. Attach a new method relationship to the inserted method.
+    // // 2. Attach a new method relationship to the inserted method.
+    // // document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
     // document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
-    document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
 
     // 3. Add a new Service.
+    const joinedId = "#" + concertname;
+    console.log(joinedId);
+
     const service = new Service({
-        id: document.id().join("#linked-domain"),
-        type: "LinkedDomains",
+        id: document.id().join(joinedId),
+        type: "KPOP",
         serviceEndpoint: "https://iota.org/",
+        properties:{
+            concert: concertname,
+            ticketPrice: ticketprice,
+        }
     });
     document.insertService(service);
 
@@ -140,4 +147,4 @@ export async function customResolution() {
     console.log("Updated DID document:", JSON.stringify(updated_document, null, 2));
 }
 
-customResolution().then(() => process.exit());
+updateDID("aespa", "6800").then(() => process.exit());
