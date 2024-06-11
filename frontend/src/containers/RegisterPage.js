@@ -8,6 +8,9 @@ import { Typography, Box, Chip, Divider, Stack, TextField, CardMedia, Button } f
 
 import React from "react";
 import useBackend from "./hooks/useBackend";
+import { createDID } from "../IOTA/createDID";
+import { vc_contract } from "../IOTA/vc_contract";
+import { vc_photo } from "../IOTA/vc_photo";
 
 //router import
 //hooks import
@@ -48,14 +51,31 @@ const Register = () => {
         })
     }
 
-    const handleRegister = () => {
+    const handleRegister = async() => {
         AddUser({
             name: name,
             id: id,
             birth: birth,
             img: img_base64
         })
+        const DIDreturn = await createDID();
+        downloadJSON(DIDreturn.privateKey, "privateKey");
+        const VCcredReturn = await vc_contract(DIDreturn.DID, name, birth);
+        downloadJSON(VCcredReturn.credentialJwt, "VCcontract");
+        const VCphotoReturn = await vc_photo(DIDreturn.DID, img_base64, name);
+        downloadJSON(VCphotoReturn.credentialJwt, "VCphoto");
     }
+
+    const downloadJSON = (data, fileName) => {
+        const jsonData = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const jsonURL = URL.createObjectURL(jsonData);
+        const link = document.createElement('a');
+        link.href = jsonURL;
+        link.download = `${fileName}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
     useEffect(()=>{
 
