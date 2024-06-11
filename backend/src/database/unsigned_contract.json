@@ -1,0 +1,17 @@
+[{
+    "did":"12345",
+    "concert": "2024 IU H.E.R. WORLD TOUR CONCERT",
+    "type": "特A區、特B區、特C區"
+},{
+    "did":"34567",
+    "concert": "2024 IU H.E.R. WORLD TOUR CONCERT",
+    "type": "特A區、特B區、特C區"
+},{
+    "did":"12345",
+    "concert": "2024 aespa LIVE TOUR - SYNK: Parallel Line",
+    "type": "VIP"
+},{
+    "did":"34567",
+    "concert": "2024 aespa LIVE TOUR - SYNK: Parallel Line",
+    "type": "VIP"
+}]

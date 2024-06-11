@@ -24,8 +24,13 @@ const AddUser = (User, ws)=>{
 
 }
 
+const AddUnsignedContract = (data, ws) => {
+    var getUContract = readDb("/database/unsigned_contract.json");
+    
+}
+
 const AddSignedContract = (data, ws) => {
 
 }
 
-export {AddUser};
+export {AddUser, AddUnsignedContract};

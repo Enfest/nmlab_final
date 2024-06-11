@@ -25,6 +25,8 @@ const CheckoutPage = () => {
     const {concert} = useWebsite();
     const specific_concert = concerts[concert-1];
 
+
+
     const handleSelect = (event) => {
         setOption(event.target.value);
     }
@@ -83,7 +85,7 @@ const CheckoutPage = () => {
                 </Typography>
                 
                 <Button sx={{width: '95%'}}
-                onClick={()=>{}}
+                onClick={()=>{()=>{}}}
                 >Create Contract
                 </Button>
             </Box>

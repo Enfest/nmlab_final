@@ -2,6 +2,7 @@
 //////////////////////////////////
 import client from './wsConnect'
 
+import { useWebsite } from './WebsiteContext';
 
 const sendData =  async(data) =>{
     if(client.readyState===client.OPEN){
@@ -12,6 +13,8 @@ const sendData =  async(data) =>{
 };
 
 const useBackend = () => {
+
+    // const { setUnsignedContract } = useWebsite();
 
     //--User handling functions--//
     const AddUser = (payload) => {
@@ -25,10 +28,16 @@ const useBackend = () => {
         sendData(["loginLine", payload]);
     }
 
+    const getUContract = () => {
+        console.log("getUContract");
+        sendData(["readUContract",{}]);
+    }
+
+
    
 
     return {
-        AddUser, loginLine
+        AddUser, loginLine, getUContract
     };
 };
 
