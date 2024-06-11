@@ -1,4 +1,5 @@
 import { AddUser } from "./writeFunction.js";
+import { readUnsignedContract } from "./readFunctions.js";
 
 const initData = () => {
     console.log('data initialization called.')
@@ -13,6 +14,11 @@ const onMessage = async (wss, ws, e) => {
         // Add functions
         case 'AddUser':{
             AddUser(payload, ws);
+            break;
+        }
+        case 'readUContract':{
+            console.log("readUContract");
+            readUnsignedContract(ws);
             break;
         }
 

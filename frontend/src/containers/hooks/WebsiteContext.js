@@ -6,6 +6,7 @@ const WebsiteContext = createContext({
     isManager:      false,
     verifyLogin:    {},
     concert:        0,
+    unsigned_contract: [],
 
 })
 const Managers =[
@@ -18,6 +19,7 @@ const WebsiteProvider = (props) => {
     const [isManager, setIsManager]     = useState(false);
     const [iflog, setIflog]             = useState(false);
     const [concert, setConcert]         = useState(0);
+    const [unsigned_contract, setUnsignedContract] = useState([]);
     const checkManager = (input_name, id) => {
         const getName = Managers.find(({name})=>(name===input_name));
         if(!getName){
@@ -39,7 +41,10 @@ const WebsiteProvider = (props) => {
         const {data} = byteString;
         const [task, payload] = JSON.parse(data);
         switch (task){
-
+            case "readUContract": 
+                console.log("readContract: ", payload);
+                setUnsignedContract(payload);
+                break;
         }
     }
 
@@ -55,7 +60,7 @@ const WebsiteProvider = (props) => {
         <WebsiteContext.Provider
             value={{
                 isManager, setIsManager, iflog, setIflog, checkManager, verifyLogin,
-                concert, setConcert
+                concert, setConcert, unsigned_contract, setUnsignedContract
             }}
             {...props}
         />

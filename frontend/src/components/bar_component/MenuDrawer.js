@@ -24,6 +24,7 @@ import {useNavigate} from "react-router-dom";
 
 //hook import
 import { useWebsite } from '../../containers/hooks/WebsiteContext';
+import useBackend from '../../containers/hooks/useBackend';
 
 // react import 
 import {useState, useEffect} from "react";
@@ -46,7 +47,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const BarDrawer = ({open, setOpen}) => {
     //hook import
     const {isManager, iflog} = useWebsite();
-
+    const { getUContract } = useBackend();
     //set state
 
     //function define
@@ -62,6 +63,10 @@ const BarDrawer = ({open, setOpen}) => {
       navigate("/");
     }
 
+    const handleManager = () => {
+        getUContract();
+        navigate("/manager");
+    }
     // const navigateToPersonal = () => {
     //   navigate("/personal");
     // }
@@ -126,7 +131,7 @@ const BarDrawer = ({open, setOpen}) => {
         <Divider />
         {isManager? (<List>
             <ListItem key={5} disablePadding>
-              <ListItemButton onClick={()=>{navigate("/manager")}}>
+              <ListItemButton onClick={handleManager}>
                 <ListItemIcon>
                 <ManageAccounts />
                 </ListItemIcon>
