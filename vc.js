@@ -41,11 +41,15 @@ const API_ENDPOINT = "http://140.112.18.206:14265";
 async function main(){
 
     // const issuerDID = process.env.DID_EXAMPLE;
-    const issuerDID = "did:iota:tst:0xfda28bbf862c9efcb67d16ca980b3703d3eee827e82d52d6a977a545ecb2ef5f"
+    const issuerDID = process.env.DID_ISSUER;
     const issuerDocument = await iotaResolution(issuerDID);
+    // console.log(issuerDocument.toJSON());
 
     const subjectDID = process.env.DID_EXAMPLE_SUBJECT;
+    // const subjectDID = "did:iota:tst:0xd212c12870617317073cf6859d517d5d6024372a772f88a43bb9d0e933de744d"
+    // const subjectDID = "did:iota:tst:0xae010b9df3261a233ac572246ca98bd098f415cd1b9611129606f17a0111f62e";
     const subjectDocument = await iotaResolution(subjectDID);
+
 
     // Create a credential subject indicating the degree earned by Alice, linked to their DID.
     const subject = {
@@ -81,7 +85,7 @@ async function main(){
     const jwk_data = {
         ..._jwk_data,
         // hardcode, think a way to store it.
-        d: "paL-Ja24J4py_-xzvXXS3mVu53fJSc9VZPSViOTU-p8",
+        d: "ka3A_dw2XW7inJ0DrLp30GfhCxsLG8QOU6oLphd7OFA",
     };
     // console.log(jwk_data);
 
