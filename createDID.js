@@ -4,7 +4,7 @@ const {
     SecretManager,
     Utils,
 } = pkg;
-import pkg_id from "@iota/identity-wasm/node/index.js";
+import pkg_id, { Jwk } from "@iota/identity-wasm/node/index.js";
 const {
     IotaDocument,
     IotaIdentityClient,
@@ -80,6 +80,7 @@ try{
     const document = new IotaDocument(networkHrp);
     const storage = new Storage(new JwkMemStore(), new KeyIdMemStore());
 
+
     // Insert a new Ed25519 verification method in the DID document.
     await document.generateMethod(
         storage,
@@ -89,6 +90,9 @@ try{
         MethodScope.VerificationMethod(),
     );
 
+    console.log(storage.keyIdStorage());
+    console.log(storage.keyStorage());
+
     // document.setMetadataCreated(Timestamp.nowUTC());
     // document.setMetadataUpdated(Timestamp.nowUTC());
 
@@ -96,6 +100,7 @@ try{
     // set as both the state controller and governor.
     const address = Utils.parseBech32Address(walletAddressBech32);
     const aliasOutput = await didClient.newDidOutput(address, document);
+    // console.log("Storage", storage.KeyIdMemStore);
     console.log("Alias Output:", JSON.stringify(aliasOutput, null, 2));
     
     // Publish the Alias Output and get the published DID document.

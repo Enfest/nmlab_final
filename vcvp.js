@@ -40,7 +40,7 @@ const {
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
-import { iotaResolution } from './iota_resolveDID.js';
+import { iotaResolution } from './resolveDID.js';
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 const API_ENDPOINT = "http://140.112.18.206:14265";
@@ -48,12 +48,12 @@ const API_ENDPOINT = "http://140.112.18.206:14265";
 async function main(){
 
     // const issuerDID = process.env.DID_EXAMPLE;
-    const issuerDID = "did:iota:tst:0xfda28bbf862c9efcb67d16ca980b3703d3eee827e82d52d6a977a545ecb2ef5f"
+    const issuerDID = process.env.DID_ISSUER;
     const issuerDocument = await iotaResolution(issuerDID);
 
     // const subjectDID = process.env.DID_EXAMPLE_SUBJECT;
     // const subjectDID = "did:iota:tst:0xd212c12870617317073cf6859d517d5d6024372a772f88a43bb9d0e933de744d"
-    const subjectDID = "did:iota:tst:0xae010b9df3261a233ac572246ca98bd098f415cd1b9611129606f17a0111f62e";
+    const subjectDID = process.env.DID_EXAMPLE_SUBJECT;
     const subjectDocument = await iotaResolution(subjectDID);
 
     // Create a credential subject indicating the degree earned by Alice, linked to their DID.
@@ -125,7 +125,7 @@ async function main(){
     const jwk_data_sub = {
         ..._jwk_data_sub,
         // hardcode, think a way to store it.
-        d: "Q3O9gmepFS6KAl5GpYs2CzZLeacfpZFdKU8JYPdf4Yg",
+        d: "gJj_zRlX5cX-ecLkBFD1zS-tScCbDuK3BPn_JRZLNNs",
     };
 
     // Create jwk object, JwkMemStore
@@ -158,7 +158,7 @@ async function main(){
         new JwsSignatureOptions(),
     );
 
-    console.log(credentialJwt.toJSON());
+    console.log("credentialJwt:", credentialJwt.toJSON());
 
     const res = new JwtCredentialValidator(new EdDSAJwsVerifier()).validate(
         credentialJwt,

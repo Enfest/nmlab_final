@@ -78,7 +78,7 @@ export async function customResolution() {
     // Also, we can use the DID we create in Lab 10 (Problem 4!)
     // const didKey = "did:iota:tst:0xef390554159e55733ab9e3dc3f7538d56007e04d2fd4641a648e52427d16bf79";
     // We use the DID that we have created before (stroed at .env)
-    const didKey = process.env.DID_EXAMPLE;
+    const didKey = process.env.DID_ISSUER;
 
     // Resolve didKey into a DID document.
     const document = await resolver.resolve(didKey);
