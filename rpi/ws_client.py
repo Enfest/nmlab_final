@@ -13,9 +13,10 @@ import RPi.GPIO as GPIO
 
 from capture_image import take_photo
 
-green_led_pin = 18
-red_led_pin = 17
-button_pin = 15
+green_led_pin = 23
+red_led_pin = 24
+button_pin = 18
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(green_led_pin, GPIO.OUT)
 GPIO.setup(red_led_pin, GPIO.OUT)
@@ -31,7 +32,11 @@ if __name__ == "__main__":
     while(True):
 
         # press button
-        # if GPIO.input(10) == GPIO.HIGH:
+
+        while True: # Run forever
+            if GPIO.input(button_pin) == GPIO.HIGH:
+                print("Button was pushed!")
+                break
 
         take_photo() # will be saved as face.jpg
 
@@ -40,16 +45,12 @@ if __name__ == "__main__":
         with open("face.jpg", "rb") as f:
             encoded_string = base64.b64encode(f.read())
         message = json.dumps(
-            {
-                "from": "RPi",
-                "picture": encoded_string.decode(),
-            }
+            ["picture", encoded_string.decode()]
         )
         ws.send(message)  # send to socket
 
         result = ws.recv()  # receive from socket
 
-        # result = parse_server_data(received)
         print(f"Received: {result}")
         if(result == "true"):
             GPIO.output(green_led_pin, GPIO.HIGH)
@@ -61,4 +62,5 @@ if __name__ == "__main__":
             GPIO.output(red_led_pin, GPIO.LOW)
 
         ws.close()  # close socket
-        break
+        print("Connection closed")
+        # break
