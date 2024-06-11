@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from 'react'
-
+import client from './wsConnect';
 
 const WebsiteContext = createContext({
     checkManager:   false,
@@ -33,6 +33,14 @@ const WebsiteProvider = (props) => {
             return false
         }
 
+    }
+
+    client.onmessage = (byteString) => {
+        const {data} = byteString;
+        const [task, payload] = JSON.parse(data);
+        switch (task){
+
+        }
     }
 
     const verifyLogin = (input_name, id) => {

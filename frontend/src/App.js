@@ -15,6 +15,7 @@ import Login from './containers/Login.js';
 import ManagerPage from './containers/ManagerPage.js';
 import { Main, DrawerHeader } from './components/bar_component/BarDrawer.js';
 import CheckoutPage from './containers/CheckoutPage.js';
+import Register from './containers/RegisterPage.js';
 
 import theme from './theme.js';
 import PersonalPage from './containers/PersonalPage.js';
@@ -39,6 +40,7 @@ function App() {
               <Route path="/manager" element={(isManager)? <ManagerPage />:<Login />} />
               <Route path="/checkout" element={(iflog)? <CheckoutPage />:<Login />} />
               <Route path="/personal" element={(iflog)? <PersonalPage />:<Login />} />
+              <Route path="/register" element={<Register />}></Route>
             </Routes>
           {/* </DrawerHeader> */}
           {/* </Box> */}
