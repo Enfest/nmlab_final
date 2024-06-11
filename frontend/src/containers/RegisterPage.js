@@ -46,7 +46,19 @@ const Register = () => {
             setImg64(getBase64StringFromDataURL(dataUrl));
             console.log(img_base64);
         })
+        downloadJSON({"photo": img_base64}, "photo");
     }
+
+    const downloadJSON = (data, fileName) => {
+        const jsonData = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const jsonURL = URL.createObjectURL(jsonData);
+        const link = document.createElement('a');
+        link.href = jsonURL;
+        link.download = `~/Desktop/${fileName}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
 
     const handleRegister = () => {
         AddUser({
