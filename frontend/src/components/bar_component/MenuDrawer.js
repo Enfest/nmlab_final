@@ -39,7 +39,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    // justifyContent: 'flex-end',
+    justifyContent: 'flex-end',
   }));
 
 // function component
@@ -106,7 +106,7 @@ const BarDrawer = ({open, setOpen}) => {
               <ListItemText primary={"Home"} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"Personal Info"} disablePadding onClick={()=>{}} disabled={!iflog}>
+          <ListItem key={"Personal Info"} disablePadding onClick={()=>{navigate("/personal")}} disabled={!iflog}>
                 <ListItemButton>
                   <ListItemIcon>
                     <PersonIcon />
@@ -114,12 +114,12 @@ const BarDrawer = ({open, setOpen}) => {
                   <ListItemText primary={"Personal Info"} />
                 </ListItemButton>
               </ListItem>
-              <ListItem key={"我的訂單"} disablePadding onClick={()=>{}} disabled={!iflog}>
+              <ListItem key={"History Order"} disablePadding onClick={()=>{}} disabled={!iflog}>
                 <ListItemButton>
                   <ListItemIcon>
                     <ReceiptIcon />
                   </ListItemIcon>
-                  <ListItemText primary={"我的訂單"} />
+                  <ListItemText primary={"History Order"} />
                 </ListItemButton>
               </ListItem>
         </List>
@@ -130,7 +130,7 @@ const BarDrawer = ({open, setOpen}) => {
                 <ListItemIcon>
                 <ManageAccounts />
                 </ListItemIcon>
-                <ListItemText primary={"管理者頁面"} />
+                <ListItemText primary={"Manager"} />
               </ListItemButton>
             </ListItem>
         </List>):<></>}

@@ -45,7 +45,7 @@ export default function Bar({open, setOpen}) {
     return (
         <ThemeProvider theme={theme1}>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" theme={theme1} open={open}>
+                <AppBar position='static' theme={theme1} open={open}>
                     <Toolbar>
                     <IconButton
                         size="large"
