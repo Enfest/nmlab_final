@@ -14,7 +14,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import PersonIcon from '@mui/icons-material/Person';
 import { ThemeProvider } from '@emotion/react';
-
+import React from 'react';
 
 // navigation import 
 import {useNavigate} from "react-router-dom";

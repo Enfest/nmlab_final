@@ -1,8 +1,12 @@
 import pkg from '@iota/sdk';
+import pkg_id from "@iota/identity-wasm/node/index.js";
+import dotenv from 'dotenv';
+import * as ed25519 from "@transmute/did-key-ed25519";
+
 const { 
     Client, 
 } = pkg;
-import pkg_id from "@iota/identity-wasm/node/index.js";
+
 const {
     CoreDocument,
     IotaDocument,
@@ -10,11 +14,11 @@ const {
     Resolver,
 } = pkg_id;
 
-import dotenv from 'dotenv';
+
 dotenv.config({ path: '.env' });
 
 // Use this external package to avoid implementing the entire did:key method in this example.
-import * as ed25519 from "@transmute/did-key-ed25519";
+
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 const API_ENDPOINT = "http://140.112.18.206:14265";

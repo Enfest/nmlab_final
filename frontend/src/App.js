@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useWebsite } from "./containers/hooks/WebsiteContext";
 import { styled } from '@mui/material/styles';
 import { ThemeProvider } from "@mui/material";
-
+import React from 'react';
 import Box from '@mui/material/Box';
 
 import Bar from "./components/Bar.js";

@@ -2,6 +2,7 @@ import { useContext, createContext, useState, useEffect } from 'react'
 import client from './wsConnect';
 import RPIclient from './rpiConnect';
 import PYclient from './pythonConnect';
+import React from 'react';
 
 const WebsiteContext = createContext({
     checkManager:   false,

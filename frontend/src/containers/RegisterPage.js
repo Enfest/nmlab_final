@@ -8,9 +8,8 @@ import { Typography, Box, Chip, Divider, Stack, TextField, CardMedia, Button } f
 
 import React from "react";
 import useBackend from "./hooks/useBackend";
-import { createDID } from "../IOTA/createDID";
-import { vc_contract } from "../IOTA/vc_contract";
-import { vc_photo } from "../IOTA/vc_photo";
+// import { vc_contract } from "../IOTA/vc_contract";
+// import { vc_photo } from "../IOTA/vc_photo";
 
 //router import
 //hooks import
@@ -36,7 +35,7 @@ const Register = () => {
     const [birth, setBirth] = useState();
     const [id, setID] = useState();
 
-    const { AddUser } = useBackend();
+    const { AddUser, createDID } = useBackend();
 
     const getFile = (file) => {
         console.log(file);
@@ -58,12 +57,15 @@ const Register = () => {
             birth: birth,
             img: img_base64
         })
-        const DIDreturn = await createDID();
-        downloadJSON(DIDreturn.privateKey, "privateKey");
-        const VCcredReturn = await vc_contract(DIDreturn.DID, name, birth);
-        downloadJSON(VCcredReturn.credentialJwt, "VCcontract");
-        const VCphotoReturn = await vc_photo(DIDreturn.DID, img_base64, name);
-        downloadJSON(VCphotoReturn.credentialJwt, "VCphoto");
+        createDID();
+        // const DIDreturn = await createDID();
+        // console.log(DIDreturn);
+        // downloadJSON(DIDreturn.privateKey, "privateKey");
+
+        // const VCcredReturn = await vc_contract(DIDreturn.DID, name, birth);
+        // downloadJSON(VCcredReturn.credentialJwt, "VCcontract");
+        // const VCphotoReturn = await vc_photo(DIDreturn.DID, img_base64, name);
+        // downloadJSON(VCphotoReturn.credentialJwt, "VCphoto");
     }
 
     const downloadJSON = (data, fileName) => {

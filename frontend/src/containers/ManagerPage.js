@@ -1,6 +1,6 @@
 //react import 
 import {useState} from "react";
-
+import React from 'react';
 //mui import
 import { Typography, Box, Chip, Divider, Stack, Select, MenuItem } from '@mui/material';
 import ClientCard from "../components/manager_component/Card";

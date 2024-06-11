@@ -1,6 +1,6 @@
 //react import 
 import {useState} from "react";
-
+import React from 'react';
 //mui import
 import { Typography, Box, Chip, Divider, Stack, CardMedia, MenuItem, Button } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';

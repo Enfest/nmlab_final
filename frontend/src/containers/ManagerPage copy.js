@@ -6,7 +6,7 @@ import { Typography, Box, Chip, Divider, Stack } from '@mui/material';
 
 //component import 
 
-
+import React from 'react';
 
 //router import
 //hooks import

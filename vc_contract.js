@@ -1,10 +1,13 @@
 import pkg from '@iota/sdk';
+import pkg_id from "@iota/identity-wasm/node/index.js";
+import dotenv from 'dotenv';
+import { iotaResolution } from './resolveDID.js';
 const { 
     Client, 
     SecretManager,
     Utils,
 } = pkg;
-import pkg_id from "@iota/identity-wasm/node/index.js";
+
 const {
     CoreDocument,
     Credential,
@@ -30,34 +33,35 @@ const {
     VerificationMethod,
 } = pkg_id;
 
-import dotenv from 'dotenv';
+
 dotenv.config({ path: '.env' });
 
-import { iotaResolution } from './resolveDID.js';
+
 
 // The API endpoint of an IOTA node, e.g. Hornet.
-const API_ENDPOINT = "http://140.112.18.206:14265";
 
-async function main(){
 
+export async function vc_contract(didKey, nameInput, bdInput){
+    const API_ENDPOINT = "http://140.112.18.206:14265";
     // const issuerDID = process.env.DID_EXAMPLE;
     const issuerDID = process.env.DID_ISSUER;
     const issuerDocument = await iotaResolution(issuerDID);
     // console.log(issuerDocument.toJSON());
 
-    const subjectDID = process.env.DID_EXAMPLE_SUBJECT;
     // const subjectDID = "did:iota:tst:0xd212c12870617317073cf6859d517d5d6024372a772f88a43bb9d0e933de744d"
     // const subjectDID = "did:iota:tst:0xae010b9df3261a233ac572246ca98bd098f415cd1b9611129606f17a0111f62e";
-    const subjectDocument = await iotaResolution(subjectDID);
+    const subjectDocument = await iotaResolution(didKey);
 
 
     // Create a credential subject indicating the degree earned by Alice, linked to their DID.
     const subject = {
         id: subjectDocument.id(),
-        name: "Alice",
+        name: nameInput,
         degreeName: "Bachelor of Science and Arts",
         degreeType: "BachelorDegree",
-        GPA: "4.0",
+        GPA: "4",
+        Birthday: bdInput,
+        CEO: "CS Kuo",
     };
 
     // Create an unsigned `UniversityDegree` credential for Alice
@@ -120,14 +124,22 @@ async function main(){
 
     console.log(credentialJwt.toJSON());
 
-    const res = new JwtCredentialValidator(new EdDSAJwsVerifier()).validate(
-        credentialJwt,
-        issuerDocument,
-        new JwtCredentialValidationOptions(),
-        // FailFast.FirstError,
-        FailFast.AllErrors,
-    );
-    console.log("credentialjwt validation", res.intoCredential());
+    // const res = new JwtCredentialValidator(new EdDSAJwsVerifier()).validate(
+    //     credentialJwt,
+    //     issuerDocument,
+    //     new JwtCredentialValidationOptions(),
+    //     // FailFast.FirstError,
+    //     FailFast.AllErrors,
+    // );
+    // console.log("credentialjwt validation", res.intoCredential());
+    return ({
+        credentialJwt: credentialJwt.toString(),
+        didKey: didKey,
+    });
 }
-
-main().then(() => process.exit()).catch(console.error);
+// await main(
+// "did:iota:tst:0xc26548185ac0a4dd151d45f4e4cbe551d5dada4bdb0b6078a5e5b2ef1a159fd0",
+// "Sam",
+// "1999-01-01",
+// "MbWrO-7Det_J4_IZKF-OAfWOdB7s7RLz9cAB2TEayN4").then(() => process.exit()).catch(console.error);
+// console.log("return",VC);

@@ -1,5 +1,6 @@
 import { AddUser } from "./writeFunction.js";
 import { readUnsignedContract } from "./readFunctions.js";
+import { register } from "./iota.js";
 
 const initData = () => {
     console.log('data initialization called.')
@@ -19,6 +20,11 @@ const onMessage = async (wss, ws, e) => {
         case 'readUContract':{
             console.log("readUContract");
             readUnsignedContract(ws);
+            break;
+        }
+        case "createDID":{
+            console.log("in createDID");
+            register();
             break;
         }
 

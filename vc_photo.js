@@ -1,10 +1,13 @@
 import pkg from '@iota/sdk';
+import pkg_id from "@iota/identity-wasm/node/index.js";
+import { iotaResolution } from './resolveDID.js';
+import dotenv from 'dotenv';
 const { 
     Client, 
     SecretManager,
     Utils,
 } = pkg;
-import pkg_id from "@iota/identity-wasm/node/index.js";
+
 const {
     CoreDocument,
     Credential,
@@ -30,15 +33,15 @@ const {
     VerificationMethod,
 } = pkg_id;
 
-import dotenv from 'dotenv';
+
 dotenv.config({ path: '.env' });
 
-import { iotaResolution } from './resolveDID.js';
+
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 
 
-export async function vc_contract(didKey, nameInput, bdInput){
+export async function vc_photo(didKey, photoInput, nameInput){
     const API_ENDPOINT = "http://140.112.18.206:14265";
     // const issuerDID = process.env.DID_EXAMPLE;
     const issuerDID = process.env.DID_ISSUER;
@@ -57,8 +60,7 @@ export async function vc_contract(didKey, nameInput, bdInput){
         degreeName: "Bachelor of Science and Arts",
         degreeType: "BachelorDegree",
         GPA: "4",
-        Birthday: bdInput,
-        CEO: "CS Kuo",
+        Photo: photoInput,
     };
 
     // Create an unsigned `UniversityDegree` credential for Alice
@@ -136,7 +138,5 @@ export async function vc_contract(didKey, nameInput, bdInput){
 }
 // await main(
 // "did:iota:tst:0xc26548185ac0a4dd151d45f4e4cbe551d5dada4bdb0b6078a5e5b2ef1a159fd0",
-// "Sam",
-// "1999-01-01",
-// "MbWrO-7Det_J4_IZKF-OAfWOdB7s7RLz9cAB2TEayN4").then(() => process.exit()).catch(console.error);
-// console.log("return",VC);
+// "ufhweiluwhhfehfuiwehfqwhfqwkjehfwqkluhfweilquhfwiuqfheiwuhfewiuhf",
+// "John Doe").then(() => process.exit()).catch(console.error);

@@ -33,11 +33,16 @@ const useBackend = () => {
         sendData(["readUContract",{}]);
     }
 
+    const createDID = () => {
+        console.log("createDID");
+        sendData(["createDID",{}]);
+    }
+
 
    
 
     return {
-        AddUser, loginLine, getUContract
+        AddUser, loginLine, getUContract, createDID
     };
 };
 

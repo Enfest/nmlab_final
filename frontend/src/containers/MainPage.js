@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 
 import {concerts} from "../informations/concert_information.js";
 import { Grid } from "@mui/material";
+import React from 'react';
 
 const MainPage = () => {
 
