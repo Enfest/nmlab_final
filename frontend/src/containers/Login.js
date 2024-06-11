@@ -53,7 +53,7 @@ const Login = () => {
             width: "100%",
             justifyContent: "center"
         }}>
-            <Typography variant="h5" component="div" justifySelf="center">User Login</Typography>
+            <Typography variant="h5" component="div" justifySelf="center">Manager Login</Typography>
             <Divider sx={{width: "100%"}}/>
             <TextField
                 variant="outlined"
@@ -78,11 +78,11 @@ const Login = () => {
                 >
                 Login
             </Button>
-            <Button 
+            {/* <Button 
                 onClick={()=>{navigate("/register")}}
                 >
                 Register
-            </Button>
+            </Button> */}
         </Box>
     )
 }

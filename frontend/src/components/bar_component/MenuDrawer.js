@@ -111,22 +111,14 @@ const BarDrawer = ({open, setOpen}) => {
               <ListItemText primary={"Home"} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"Personal Info"} disablePadding onClick={()=>{navigate("/personal")}} disabled={!iflog}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <PersonIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={"Personal Info"} />
-                </ListItemButton>
-              </ListItem>
-              <ListItem key={"History Order"} disablePadding onClick={()=>{}} disabled={!iflog}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <ReceiptIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={"History Order"} />
-                </ListItemButton>
-              </ListItem>
+          <ListItem key={"Find Contract"} disablePadding onClick={()=>{navigate("/find")}}>
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Find Contract"} />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
         {isManager? (<List>

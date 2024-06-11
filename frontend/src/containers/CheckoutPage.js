@@ -21,11 +21,24 @@ import PriceTable from "../components/PriceTable";
 const CheckoutPage = () => {
 
     const [option, setOption] = useState('');
-
+    const [vc, setVC] = useState('');
     const {concert} = useWebsite();
     const specific_concert = concerts[concert-1];
 
+    const handleContract = () => {
 
+    }
+
+    const getFile = (file) => {
+        console.log(file);
+        // console.log(file.readString());
+        console.log(URL.createObjectURL(file));
+        // const reader = FileReader.readAsDataURL(file);
+        // console.log(reader);
+        fetch(URL.createObjectURL(file))
+            .then( (r) => r.json() )
+            .then( (responsejson) => console.log(responsejson))
+    }
 
     const handleSelect = (event) => {
         setOption(event.target.value);
@@ -83,9 +96,15 @@ const CheckoutPage = () => {
                 <Typography variant="h5" component="div">
                     {option} NTD
                 </Typography>
-                
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                   .
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    Upload VC
+                </Typography>
+                <input type="file" onChange={(e) => {getFile(e.target.files[0])}} accept="img/*"></input>
                 <Button sx={{width: '95%'}}
-                onClick={()=>{()=>{}}}
+                // onClick={()=>{()=>{handle}}}
                 >Create Contract
                 </Button>
             </Box>

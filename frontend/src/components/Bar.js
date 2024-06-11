@@ -60,6 +60,7 @@ export default function Bar({open, setOpen}) {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Heya Heya Heya
                     </Typography>
+                    <Button color="inherit" onClick={()=>{navigate("/register")}}>Register</Button>
                     <Button color="inherit" onClick={()=>{navigate("/login")}}>Login</Button>
                     </Toolbar>
                 </AppBar>

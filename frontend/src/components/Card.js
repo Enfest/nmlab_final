@@ -21,12 +21,7 @@ const ConcertCard = ({name, img, sale_time, perform_time, index}) => {
 
   const handleBuy = () => {
     setConcert(index+1);
-    if(!iflog){
-      navigate("/login");
-    }
-    else{
-      navigate("/checkout");
-    }
+    navigate("/checkout");
   }
 
   return (
