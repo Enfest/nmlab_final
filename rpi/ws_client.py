@@ -22,19 +22,9 @@ GPIO.setup(red_led_pin, GPIO.OUT)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 # DATA_SAVE_DIR = "/home/pi/picture"
-SERVER_IP = "192.168.0.49"
+SERVER_IP = "127.0.0.1"
 SERVER_PORT = 8082
 Url = f"ws://{SERVER_IP}:{SERVER_PORT}"
-
-def parse_server_data(message):
-    try:
-        message = json.loads(message)
-        result = message["result"]
-        print(f"[From Server] Result: {result}")
-        return result
-    except:
-        print("Invalid json format:")
-        print(message)
         
 if __name__ == "__main__":
 
@@ -52,16 +42,16 @@ if __name__ == "__main__":
         message = json.dumps(
             {
                 "from": "RPi",
-                "photo": encoded_string.decode(),
+                "picture": encoded_string.decode(),
             }
         )
         ws.send(message)  # send to socket
 
-        received = ""
-        ws.recv(received)  # receive from socket
+        result = ws.recv()  # receive from socket
 
-        result = parse_server_data(received)
-        if(result == "match"):
+        # result = parse_server_data(received)
+        print(f"Received: {result}")
+        if(result == "true"):
             GPIO.output(green_led_pin, GPIO.HIGH)
             time.sleep(5)
             GPIO.output(green_led_pin, GPIO.LOW)
@@ -71,3 +61,4 @@ if __name__ == "__main__":
             GPIO.output(red_led_pin, GPIO.LOW)
 
         ws.close()  # close socket
+        break
