@@ -18,7 +18,7 @@ import CheckoutPage from './containers/CheckoutPage.js';
 import Register from './containers/RegisterPage.js';
 
 import theme from './theme.js';
-import PersonalPage from './containers/PersonalPage.js';
+import FindPage from './containers/PersonalPage.js';
 
 
 function App() {
@@ -38,8 +38,8 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/login" element={<Login />}></Route>
               <Route path="/manager" element={(isManager)? <ManagerPage />:<Login />} />
-              <Route path="/checkout" element={(iflog)? <CheckoutPage />:<Login />} />
-              <Route path="/personal" element={(iflog)? <PersonalPage />:<Login />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/find" element={<FindPage />} />
               <Route path="/register" element={<Register />}></Route>
             </Routes>
           {/* </DrawerHeader> */}
