@@ -34,3 +34,6 @@ def postInput():
     result = detect_faces(test_image, faces, threshold=0.4)
 
     return jsonify({'result': str(result)})
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
