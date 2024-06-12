@@ -34,7 +34,7 @@ const {
 } = pkg_id;
 
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '../.env' });
 
 
 
@@ -136,7 +136,7 @@ export async function vc_photo(didKey, photoInput, nameInput){
         didKey: didKey,
     });
 }
-// await main(
+// await vc_photo(
 // "did:iota:tst:0xc26548185ac0a4dd151d45f4e4cbe551d5dada4bdb0b6078a5e5b2ef1a159fd0",
 // "ufhweiluwhhfehfuiwehfqwhfqwkjehfwqkluhfweilquhfwiuqfheiwuhfewiuhf",
 // "John Doe").then(() => process.exit()).catch(console.error);

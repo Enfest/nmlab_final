@@ -22,7 +22,7 @@ const {
 } = pkg_id;
 
 import dotenv from 'dotenv';
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '../.env' });
 
 // Use this external package to avoid implementing the entire did:key method in this example.
 import * as ed25519 from "@transmute/did-key-ed25519";
@@ -31,16 +31,16 @@ import * as ed25519 from "@transmute/did-key-ed25519";
 const API_ENDPOINT = "http://140.112.18.206:14265";
 
 // stronghold configuration
-const strongholdPath = 'client.stronghold';
+const strongholdPath = '../client.stronghold';
 const password = process.env.STRONGHOLD_PASSWORD;
 
 // Demonstrates how to set up a resolver using custom handlers.
-export async function customResolution() {
-    
+export async function updateDID(didKey, concertName, seat, price) {
+    console.log("passworrd:", password);
     // Set up a handler for resolving Ed25519 did:key
-    const keyHandler = async function(didKey){
+    const keyHandler = async function(didkey){
         let document = await ed25519.resolve(
-            didKey,
+            didkey,
             { accept: "application/did+ld+json" },
         );
         return CoreDocument.fromJSON(document.didDocument);
@@ -78,7 +78,7 @@ export async function customResolution() {
     // Also, we can use the DID we create in Lab 10 (Problem 4!)
     // const didKey = "did:iota:tst:0xef390554159e55733ab9e3dc3f7538d56007e04d2fd4641a648e52427d16bf79";
     // We use the DID that we have created before (stroed at .env)
-    const didKey = process.env.DID_ISSUER;
+    // const didKey = process.env.DID_;
 
     // Resolve didKey into a DID document.
     const document = await resolver.resolve(didKey);
@@ -94,28 +94,35 @@ export async function customResolution() {
     }
 
     // update
-    const storage = new Storage(new JwkMemStore(), new KeyIdMemStore());
-    // 1. Insert a new Ed25519 verification method in the DID document.
-    await document.generateMethod(
-        storage,
-        JwkMemStore.ed25519KeyType(),
-        JwsAlgorithm.EdDSA,
-        "#key-2",
-        MethodScope.VerificationMethod(),
-    );
+    // const storage = new Storage(new JwkMemStore(), new KeyIdMemStore());
+    // // 1. Insert a new Ed25519 verification method in the DID document.
+    // await document.generateMethod(
+    //     storage,
+    //     JwkMemStore.ed25519KeyType(),
+    //     JwsAlgorithm.EdDSA,
+    //     "#key-2",
+    //     MethodScope.VerificationMethod(),
+    // );
 
     // console.log("Document:", document.id());
 
 
     // 2. Attach a new method relationship to the inserted method.
     // document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
-    document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
+    // document.attachMethodRelationship(document.id().join("#key-2"), MethodRelationship.Authentication);
 
     // 3. Add a new Service.
+    const link = "#" + price;
+
     const service = new Service({
-        id: document.id().join("#linked-domain"),
+        id: document.id().join(link),
         type: "LinkedDomains",
         serviceEndpoint: "https://iota.org/",
+        properties:{
+            concert: concertName,
+            seat: seat,
+            price: price,
+        }
     });
     document.insertService(service);
 
@@ -140,4 +147,4 @@ export async function customResolution() {
     console.log("Updated DID document:", JSON.stringify(updated_document, null, 2));
 }
 
-customResolution().then(() => process.exit());
+// await updateDID("did:iota:tst:0x3bc9d60791a45bbe2951f7cad0ea7a98d309b1e7b087d7be69bda0353a05aff7", "Show_what_i_have", "A34b", "200").then(() => process.exit());

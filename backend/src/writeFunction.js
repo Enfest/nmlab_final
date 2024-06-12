@@ -29,8 +29,17 @@ const AddUnsignedContract = (data, ws) => {
     
 }
 
-const AddSignedContract = (data, ws) => {
-
+const AddContract = (data, ws) => {
+    var getContracts = readDb("/database/user.json");
+    // writeDb(User);
+    if(!getContracts){
+        writeDb(getContracts, "/database/user.json");
+        sendData(["addUser", false], ws);
+    }
+    else{
+        getContracts.push(data);
+        writeDb(getContracts, "/database/user.json");
+    }
 }
 
-export {AddUser, AddUnsignedContract};
+export {AddUser, AddContract};

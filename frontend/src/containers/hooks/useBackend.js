@@ -33,16 +33,27 @@ const useBackend = () => {
         sendData(["readUContract",{}]);
     }
 
-    const createDID = () => {
-        console.log("createDID");
-        sendData(["createDID",{}]);
+    const register = (payload) => {
+        console.log("register");
+        sendData(["register",payload]);
     }
 
+    const verify = (payload) => {
+        console.log("verify");
+        sendData(["verify", payload]);
+    }
+    const getIn = (payload) => {
+        console.log("getIn");
+        sendData(["getIn", payload]);
+    }
 
-   
+    const sendContract = (payload) => {
+        console.log("sendData");
+        sendData(["getContract",payload]);
+    }
 
     return {
-        AddUser, loginLine, getUContract, createDID
+        AddUser, loginLine, getUContract, register, verify, getIn, sendContract
     };
 };
 

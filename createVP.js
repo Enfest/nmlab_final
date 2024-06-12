@@ -18,7 +18,7 @@ import { iotaResolution } from './resolveDID.js';
 // The API endpoint of an IOTA node, e.g. Hornet.
 const API_ENDPOINT = "http://140.112.18.206:14265";
 
-export async function validateVP(nonce, subjectDID, subjectPrivateKey, subjectJwtString){
+export async function createVP(nonce, subjectDID, subjectPrivateKey, subjectJwtString){
 
     const subjectDocument = await iotaResolution(subjectDID);
     const subjectFragment = "key-1";
@@ -76,11 +76,11 @@ export async function validateVP(nonce, subjectDID, subjectPrivateKey, subjectJw
 }
 
 // // ================ SAMPLE USAGE ===================
-const nonce = "475a7984-1bb5-4c4c-a56f-822bccd46440";
-const subjectDID = "did:iota:tst:0xb0fc926431b36c73bbb4d88c41571f84e0d23ad801fb71c07263da2a5d5bfd6b";
-const subjectPrivateKey = "PUABufEkgLY8MNs1fAzSxd5K3a-SKkQsSAaVw_5LzLY";
-const credentialJwtString = "eyJraWQiOiJkaWQ6aW90YTp0c3Q6MHgxNjFlYWZkMDc5N2FkNzhiODg5MTQ3N2M4OTMyZGEzZjAwMjJhZmM5NTZjNzdhY2NjNjlkNGQ4OTJiZDFmMTc2I2tleS0xIiwidHlwIjoiSldUIiwiYWxnIjoiRWREU0EifQ.eyJpc3MiOiJkaWQ6aW90YTp0c3Q6MHgxNjFlYWZkMDc5N2FkNzhiODg5MTQ3N2M4OTMyZGEzZjAwMjJhZmM5NTZjNzdhY2NjNjlkNGQ4OTJiZDFmMTc2IiwibmJmIjoxNzE4MDk4Nzg4LCJqdGkiOiJodHRwczovL2V4YW1wbGUuZWR1L2NyZWRlbnRpYWxzLzM3MzIiLCJzdWIiOiJkaWQ6aW90YTp0c3Q6MHhiMGZjOTI2NDMxYjM2YzczYmJiNGQ4OGM0MTU3MWY4NGUwZDIzYWQ4MDFmYjcxYzA3MjYzZGEyYTVkNWJmZDZiIiwidmMiOnsiQGNvbnRleHQiOiJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSIsInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiLCJVbml2ZXJzaXR5RGVncmVlQ3JlZGVudGlhbCJdLCJjcmVkZW50aWFsU3ViamVjdCI6eyJHUEEiOiI0LjAiLCJkZWdyZWVOYW1lIjoiQmFjaGVsb3Igb2YgU2NpZW5jZSBhbmQgQXJ0cyIsImRlZ3JlZVR5cGUiOiJCYWNoZWxvckRlZ3JlZSIsIm5hbWUiOiJBbGljZSJ9fX0.FTgmUT1HjV9kPRxb8D8hiyvU39HEyhnwprxw3LMGNwQQVyN4bFcArPSZPUIJ9zh4g6hmCWjdLBNTLmCt3qT0Cg";
+// const nonce = "475a7984-1bb5-4c4c-a56f-822bccd46440";
+// const subjectDID = "did:iota:tst:0xa56fe23d28d2566f9b7231f30eec6939eefc57efc1c56302cacdb6877553c839";
+// const subjectPrivateKey = "whvQT8vwAdNl05cyNTvZWWU72JYjpXvKVmzdbYHx8qE";
+// const credentialJwtString = "eyJraWQiOiJkaWQ6aW90YTp0c3Q6MHgxNjFlYWZkMDc5N2FkNzhiODg5MTQ3N2M4OTMyZGEzZjAwMjJhZmM5NTZjNzdhY2NjNjlkNGQ4OTJiZDFmMTc2I2tleS0xIiwidHlwIjoiSldUIiwiYWxnIjoiRWREU0EifQ.eyJpc3MiOiJkaWQ6aW90YTp0c3Q6MHgxNjFlYWZkMDc5N2FkNzhiODg5MTQ3N2M4OTMyZGEzZjAwMjJhZmM5NTZjNzdhY2NjNjlkNGQ4OTJiZDFmMTc2IiwibmJmIjoxNzE4MTQyMzIyLCJqdGkiOiJodHRwczovL2V4YW1wbGUuZWR1L2NyZWRlbnRpYWxzLzM3MzIiLCJzdWIiOiJkaWQ6aW90YTp0c3Q6MHhjMjY1NDgxODVhYzBhNGRkMTUxZDQ1ZjRlNGNiZTU1MWQ1ZGFkYTRiZGIwYjYwNzhhNWU1YjJlZjFhMTU5ZmQwIiwidmMiOnsiQGNvbnRleHQiOiJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSIsInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiLCJVbml2ZXJzaXR5RGVncmVlQ3JlZGVudGlhbCJdLCJjcmVkZW50aWFsU3ViamVjdCI6eyJCaXJ0aGRheSI6IjE5OTktMDEtMDEiLCJDRU8iOiJDUyBLdW8iLCJHUEEiOiI0IiwiZGVncmVlTmFtZSI6IkJhY2hlbG9yIG9mIFNjaWVuY2UgYW5kIEFydHMiLCJkZWdyZWVUeXBlIjoiQmFjaGVsb3JEZWdyZWUiLCJuYW1lIjoiU2FtIn19fQ.X0bvRum9A_9i_TYjC3YJh-H8HdZNb5bHZ7PWjPx0WxuV5ovOBa8EX4HA8YzLjqFpWT6Du4nNKC78bFPnWQsDDA";
 
-console.log(await validateVP(nonce, subjectDID, subjectPrivateKey, credentialJwtString));
-process.exit();
+// console.log(await validateVP(nonce, subjectDID, subjectPrivateKey, credentialJwtString));
+// process.exit();
 // // ================ SAMPLE USAGE ===================

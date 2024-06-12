@@ -19,6 +19,7 @@ import Register from './containers/RegisterPage.js';
 
 import theme from './theme.js';
 import FindPage from './containers/PersonalPage.js';
+import GetIn from './containers/GetIn.js';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/find" element={<FindPage />} />
               <Route path="/register" element={<Register />}></Route>
+              <Route path="/getin" element={<GetIn />}></Route>
             </Routes>
           {/* </DrawerHeader> */}
           {/* </Box> */}

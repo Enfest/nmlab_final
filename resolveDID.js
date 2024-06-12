@@ -61,7 +61,7 @@ export async function iotaResolution(didKey) {
         // console.log(didKeyDoc.constructor.name);
     
         if (didKeyDoc instanceof IotaDocument) {
-            console.log("Resolved DID Key document:", JSON.stringify(didKeyDoc, null, 2));
+            console.log("Resolved DID Key document:", didKeyDoc.toJSON());
         } else {
             throw new Error(
                 "the resolved document type should match the output type of keyHandler",
@@ -77,11 +77,13 @@ export async function iotaResolution(didKey) {
     }
 }
 
+// await iotaResolution("did:iota:tst:0x9a098767ef4f354b78bd5f51cbb55dc8ee852df2791e769926db90fabf14ee75");
+
 // A valid Ed25519 did:key value taken from https://w3c-ccg.github.io/did-method-key/#example-1-a-simple-ed25519-did-key-value.
 // const didKey = "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK";
 // Also, we can use the DID we create in Lab 10 (Problem 4!)
 // const didKey = "did:iota:tst:0xef390554159e55733ab9e3dc3f7538d56007e04d2fd4641a648e52427d16bf79";
 // We use the DID that we have created before (stroed at .env)
-// const didKey = process.env.DID_EXAMPLE;
+const didKey = process.env.DID_EXAMPLE;
 
-// iotaResolution(didKey).then(() => process.exit());
+iotaResolution(didKey).then(() => process.exit());

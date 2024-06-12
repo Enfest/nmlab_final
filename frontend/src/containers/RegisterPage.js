@@ -35,7 +35,7 @@ const Register = () => {
     const [birth, setBirth] = useState();
     const [id, setID] = useState();
 
-    const { AddUser, createDID } = useBackend();
+    const { AddUser, register } = useBackend();
 
     const getFile = (file) => {
         console.log(file);
@@ -57,7 +57,12 @@ const Register = () => {
             birth: birth,
             img: img_base64
         })
-        createDID();
+        register({
+            name: name,
+            id: id,
+            birth: birth,
+            img: img_base64
+        });
         // const DIDreturn = await createDID();
         // console.log(DIDreturn);
         // downloadJSON(DIDreturn.privateKey, "privateKey");

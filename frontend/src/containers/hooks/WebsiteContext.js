@@ -78,6 +78,22 @@ const WebsiteProvider = (props) => {
                 console.log("readContract: ", payload);
                 setUnsignedContract(payload);
                 break;
+            case "didKey":
+                console.log("didKey:", payload);
+                downloadJSON(payload, "didKey");
+            case "privateKey":
+                console.log("privateKey:", payload);
+                downloadJSON(payload, "privateKey");
+            case "vcContract":
+                console.log("vcContract", payload);
+                downloadJSON(payload, "vcContract");
+            case "vcPhoto":
+                console.log("vcPhoto", payload);
+                downloadJSON(payload, "vcPhoto");
+            case "vpSuccess":
+                console.log("vpSuccess", payload);
+            case "getIn":
+                console.log("getIn", payload);
         }
     }
     RPIclient.onmessage = (byteString) => {
@@ -97,7 +113,17 @@ const WebsiteProvider = (props) => {
         }
     }
 
-
+    const downloadJSON = (data, fileName) => {
+        console.log("in download JSON");
+        const jsonData = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const jsonURL = URL.createObjectURL(jsonData);
+        const link = document.createElement('a');
+        link.href = jsonURL;
+        link.download = `${fileName}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
     
 
     const verifyLogin = (input_name, id) => {

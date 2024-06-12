@@ -34,7 +34,7 @@ const {
 } = pkg_id;
 
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '../.env' });
 
 
 
@@ -137,9 +137,8 @@ export async function vc_contract(didKey, nameInput, bdInput){
         didKey: didKey,
     });
 }
-// await main(
+// await vc_contract(
 // "did:iota:tst:0xc26548185ac0a4dd151d45f4e4cbe551d5dada4bdb0b6078a5e5b2ef1a159fd0",
 // "Sam",
-// "1999-01-01",
-// "MbWrO-7Det_J4_IZKF-OAfWOdB7s7RLz9cAB2TEayN4").then(() => process.exit()).catch(console.error);
+// "1999-01-01").then(() => process.exit()).catch(console.error);
 // console.log("return",VC);
