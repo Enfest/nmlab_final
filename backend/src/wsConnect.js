@@ -1,10 +1,16 @@
-import { AddUser } from "./writeFunction.js";
-import { readUnsignedContract } from "./readFunctions.js";
+import { AddUser, writePhoto } from "./writeFunction.js";
+import { readPhoto, readUnsignedContract } from "./readFunctions.js";
 import { register, verify, getIn } from "./iota.js";
+import { sendStringToServer, sendbackServer } from "./faceReconig.js";
 
 const initData = () => {
     console.log('data initialization called.')
 }
+
+const sendData = (data, ws) => {
+    ws.send(JSON.stringify(data));
+}
+
 
 const onMessage = async (wss, ws, e) => {
     console.log("in on message");
@@ -24,7 +30,20 @@ const onMessage = async (wss, ws, e) => {
         }
         case "register":{
             console.log("in register");
-            register(payload, ws);
+            const img1 = await readPhoto();
+            const result = await sendStringToServer(payload.img, img1);
+            console.log("in register: ", result);
+            if(result.result = 'true'){
+                // sendbackServer(result.result);
+                sendData(["registerSucess",{}],ws);
+                register(payload, ws);
+            }
+            else{
+                sendData(["registerFailed",{}],ws);
+                // sendbackServer(result.result);
+            }
+            // console.log(res);
+            // register(payload, ws);
             break;
         }
         case "verify":{
@@ -34,7 +53,17 @@ const onMessage = async (wss, ws, e) => {
         }
         case "getIn":{
             console.log("in getIn");
-            getIn(payload, ws);
+            await getIn(payload, ws);
+            break;
+        }
+        case "picture":{
+            console.log("in picture");
+            console.log(payload);
+            writePhoto(payload.photo);
+            break;
+        }
+        case "checkP":{
+            sendData()
             break;
         }
         // case "getContract":{

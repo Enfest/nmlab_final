@@ -4,14 +4,16 @@ import RPIclient from './rpiConnect';
 import PYclient from './pythonConnect';
 import React from 'react';
 
+
 const WebsiteContext = createContext({
     checkManager:   false,
     isManager:      false,
     verifyLogin:    {},
     concert:        0,
     unsigned_contract: [],
-    status:         ""
-
+    status:         "",
+    validate:       false,
+    regis:       true
 })
 const Managers =[
     {
@@ -34,6 +36,8 @@ const WebsiteProvider = (props) => {
     const [concert, setConcert]         = useState(0);
     const [unsigned_contract, setUnsignedContract] = useState([]);
     const [status, setStatus] = useState("Register");
+    const [regis, setRegister] = useState(true);
+    const [validate, setValidate] = useState(false);
     const checkManager = (input_name, id) => {
         const getName = Managers.find(({name})=>(name===input_name));
         if(!getName){
@@ -92,8 +96,19 @@ const WebsiteProvider = (props) => {
                 downloadJSON(payload, "vcPhoto");
             case "vpSuccess":
                 console.log("vpSuccess", payload);
+                setValidate(true);
             case "getIn":
                 console.log("getIn", payload);
+                setValidate(payload.result);
+            case "unsuccessR":
+                console.log("unsuccessR", payload);
+                setRegister(false);
+            case "registerSucess":
+                console.log("registerSucess");
+                setRegister(true);
+            case "registerFailed":
+                console.log("registerFailed");
+                setRegister(false);
         }
     }
     RPIclient.onmessage = (byteString) => {
@@ -138,7 +153,7 @@ const WebsiteProvider = (props) => {
         <WebsiteContext.Provider
             value={{
                 isManager, setIsManager, iflog, setIflog, checkManager, verifyLogin,
-                concert, setConcert, unsigned_contract, setUnsignedContract
+                concert, setConcert, unsigned_contract, setUnsignedContract, validate, regis
             }}
             {...props}
         />

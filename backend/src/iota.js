@@ -6,6 +6,8 @@ import { validateVP } from "../../validateVP.js";
 import { updateDID } from "../../updateDID.js";
 import { validateVC } from "../../validateVC.js";
 import { AddContract } from "./writeFunction.js";
+import { readPhoto } from "./readFunctions.js";
+import { sendStringToServer } from "./faceReconig.js";
 
 async function register(payload, ws){
     try{
@@ -37,7 +39,7 @@ async function verify(payload, ws){
     try{
         const presentation = await createVP(nonce, payload.DID, payload.privateKey, payload.vc);
         const vpSuccess = await validateVP(nonce, presentation);
-        sendData(["vpSuccess", vpSuccess], ws);
+        sendData(["vpSuccess", {}], ws);
         await updateDID(payload.DID, payload.concert, payload.seat, payload.price);
         AddContract({
             DID: payload.DID,
@@ -52,8 +54,10 @@ async function verify(payload, ws){
 
 async function getIn(payload, ws){
     try{
-        const check = await validateVC(payload.vc);
-        sendData(["getIn", check], ws);
+        const check = await validateVC(JSON.stringify(payload.vc));
+        const img1 = await readPhoto();
+        const result = await sendStringToServer(img1, check.photo);
+        sendData(["getIn", result], ws);
         // process.exit();
     }catch(error){
         console.log(error);

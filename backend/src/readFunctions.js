@@ -11,5 +11,11 @@ const readUnsignedContract = (ws)=>{
     sendData(["readUContract", getUContract], ws);
 }
 
+const readPhoto = async () => {
+    var getPhoto = readDb("/database/photo.json");
+    return getPhoto.photo;
 
-export {readUnsignedContract};
+}
+
+
+export {readUnsignedContract, readPhoto};

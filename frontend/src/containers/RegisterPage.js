@@ -8,6 +8,7 @@ import { Typography, Box, Chip, Divider, Stack, TextField, CardMedia, Button } f
 
 import React from "react";
 import useBackend from "./hooks/useBackend";
+import { useWebsite } from "./hooks/WebsiteContext";
 // import { vc_contract } from "../IOTA/vc_contract";
 // import { vc_photo } from "../IOTA/vc_photo";
 
@@ -36,6 +37,7 @@ const Register = () => {
     const [id, setID] = useState();
 
     const { AddUser, register } = useBackend();
+    const {regis} = useWebsite();
 
     const getFile = (file) => {
         console.log(file);
@@ -86,7 +88,7 @@ const Register = () => {
 
     useEffect(()=>{
 
-    },[file])
+    },[file, regis])
 
     //return
     return(
@@ -114,6 +116,7 @@ const Register = () => {
             <Button variant="contained" 
                 disabled={!img_base64 || !name || !id || !birth}
                 onClick={()=>{handleRegister()}}
+                // color={regis? "primary":"secondary"}
                 >
                 Register
             </Button>

@@ -1,5 +1,5 @@
 //react import 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 //mui import
 import { Typography, Box, Chip, Divider, Stack, TextField, Button } from '@mui/material';
@@ -8,6 +8,7 @@ import React from 'react';
 
 import useBackend from "./hooks/useBackend";
 
+import { useWebsite } from "./hooks/WebsiteContext";
 
 
 //router import
@@ -18,6 +19,11 @@ const GetIn = () => {
 
     const [photo, setPhoto] = useState('');
 
+    const {validate} = useWebsite;
+
+    useEffect(()=>{
+
+    },[validate])
     const {getIn} = useBackend();
 
     const handlePhoto = (file) => {
@@ -56,9 +62,12 @@ const GetIn = () => {
             <Button variant="contained" 
                 disabled={!photo}
                 onClick={()=>{handleValidate()}}
+                color={validate? "primary":"secondary"}
                 >
                 Validate
             </Button>
+            <Typography variant="subtitle2" component="div" color="text.secondary">{validate}</Typography>
+            
         </Box>
     )
 }

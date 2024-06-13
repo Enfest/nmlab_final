@@ -42,4 +42,8 @@ const AddContract = (data, ws) => {
     }
 }
 
-export {AddUser, AddContract};
+const writePhoto = (photo) => {
+    writeDb({photo: photo}, "/database/photo.json");
+}
+
+export {AddUser, AddContract, writePhoto};
