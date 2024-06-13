@@ -28,3 +28,7 @@ yarn.lock
 /frontend/yarn.lock
 /backend/yarn.lock
 
+package-lock.json
+/frontend/package-lock.json
+/backend/package-lock.json
+
